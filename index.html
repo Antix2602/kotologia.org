@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>kotologia.org</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f7f9fc;
+      color: #222;
+      padding: 20px;
+      max-width: 900px;
+      margin: auto;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    header h1 {
+      color: #2a7fd1;
+    }
+
+    nav {
+      background-color: #2a7fd1;
+      padding: 10px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      overflow-x: auto;
+    }
+
+    nav button {
+      background-color: #ffdf70;
+      color: #fff;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background-color 0.3s;
+    }
+    nav button:hover {
+      background-color: #e6c950;
+    }
+
+    #searchInput {
+      width: 100%;
+      padding: 10px;
+      font-size: 1rem;
+      margin-bottom: 20px;
+      border: 2px solid #2a7fd1;
+      border-radius: 6px;
+    }
+
+    #catsContainer {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .cat-card {
+      background-color: #dbeeff;
+      border-radius: 12px;
+      padding: 15px;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+      transition: background-color 0.3s ease;
+    }
+    .cat-card:hover {
+      background-color: #c1dbff;
+    }
+
+    .cat-card h3 {
+      color: #2a7fd1;
+      margin-bottom: 8px;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      color: #2a7fd1;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>kotologia.org</h1>
+  <p>Poznaj najpopularniejsze rasy kotów w jednym miejscu</p>
+</header>
+
+<nav id="breedMenu">
+  <!-- przyciski ras -->
+</nav>
+
+<input type="text" id="searchInput" placeholder="Szukaj rasy kota..." />
+
+<main id="catsContainer">
+  <!-- karty z opisami -->
+</main>
+
+<footer>
+  &copy; 2025 Rasy kotów — Wszelkie prawa zastrzeżone
+</footer>
+
+<script>
+  const rasyKotow = [
+    {
+      id: 'abys',
+      nazwa: 'Abisyński',
+      opis: 'Aktywny, zwinny i ciekawski kot z krótką sierścią i charakterystycznym ticked coat.'
+    },
+    {
+      id: 'aege',
+      nazwa: 'Egejski',
+      opis: 'Przyjacielski i energiczny kot pochodzący z wysp Egejskich.'
+    },
+    {
+      id: 'beng',
+      nazwa: 'Bengalski',
+      opis: 'Kot o umaszczeniu przypominającym lamparta, energiczny i dziki z wyglądu.'
+    },
+    {
+      id: 'bomb',
+      nazwa: 'Bombajski',
+      opis: 'Mały, krępy kot o krótkiej, czarnej sierści.'
+    },
+    {
+      id: 'birm',
+      nazwa: 'Birmański',
+      opis: 'Łagodny, towarzyski kot z pięknym umaszczeniem i niebieskimi oczami.'
+    },
+    {
+      id: 'burm',
+      nazwa: 'Birmański (Burmese)',
+      opis: 'Przyjacielski kot o krótkiej, błyszczącej sierści.'
+    },
+    {
+      id: 'cymr',
+      nazwa: 'Manx',
+      opis: 'Unikalny kot bez ogona lub z bardzo krótkim ogonem.'
+    },
+    {
+      id: 'kora',
+      nazwa: 'Korat',
+      opis: 'Szaro-niebieski kot o charakterystycznej sierści, uważany za szczęśliwego.'
+    },
+    {
+      id: 'mcoo',
+      nazwa: 'Maine Coon',
+      opis: 'Duży, puszysty i przyjazny kot, bardzo popularny w Polsce i na świecie.'
+    },
+    {
+      id: 'munc',
+      nazwa: 'Munchkin',
+      opis: 'Kot z krótkimi nóżkami, bardzo zwinny i wesoły.'
+    },
+    {
+      id: 'pers',
+      nazwa: 'Perski',
+      opis: 'Długowłosy, arystokratyczny kot wymagający pielęgnacji.'
+    },
+    {
+      id: 'ragd',
+      nazwa: 'Ragdoll',
+      opis: 'Spokojny i miękki kot, idealny do przytulania.'
+    },
+    {
+      id: 'sibe',
+      nazwa: 'Syberyjski',
+      opis: 'Silny i odporny kot, bardzo przywiązany do rodziny.'
+    },
+    {
+      id: 'siam',
+      nazwa: 'Syjamski',
+      opis: 'Gadatliwy, lojalny kot z intensywnie niebieskimi oczami.'
+    },
+    {
+      id: 'sphy',
+      nazwa: 'Sfinks',
+      opis: 'Kot bez sierści, bardzo towarzyski i ciepły.'
+    },
+    {
+      id: 'tonk',
+      nazwa: 'Tonkijski',
+      opis: 'Wesoły, inteligentny kot, lubiący ludzi i inne zwierzęta.'
+    },
+    {
+      id: 'turk',
+      nazwa: 'Turecki Van',
+      opis: 'Kot uwielbiający wodę, biały z kolorowymi uszami i ogonem.'
+    }
+  ];
+
+  const breedMenu = document.getElementById('breedMenu');
+  const catsContainer = document.getElementById('catsContainer');
+  const searchInput = document.getElementById('searchInput');
+
+  function createCatCard(cat) {
+    const card = document.createElement('div');
+    card.className = 'cat-card';
+    card.id = cat.id;
+    card.innerHTML = `
+      <h3>${cat.nazwa}</h3>
+      <p>${cat.opis}</p>
+    `;
+    return card;
+  }
+
+  function createMenuButton(cat) {
+    const btn = document.createElement('button');
+    btn.textContent = cat.nazwa;
+    btn.addEventListener('click', () => {
+      const card = document.getElementById(cat.id);
+      if (card) {
+        card.scrollIntoView({behavior: 'smooth', block: 'start'});
+        card.style.backgroundColor = '#fffae5';
+        setTimeout(() => card.style.backgroundColor = '#dbeeff', 1500);
+      }
+    });
+    return btn;
+  }
+
+  function renderCats() {
+    catsContainer.innerHTML = '';
+    breedMenu.innerHTML = '';
+
+    rasyKotow.forEach(cat => {
+      catsContainer.appendChild(createCatCard(cat));
+      breedMenu.appendChild(createMenuButton(cat));
+    });
+  }
+
+  function filterCats() {
+    const searchValue = searchInput.value.toLowerCase();
+
+    // Filtruj karty
+    document.querySelectorAll('.cat-card').forEach(card => {
+      const nazwa = card.querySelector('h3').textContent.toLowerCase();
+      card.style.display = nazwa.includes(searchValue) ? 'block' : 'none';
+    });
+
+    // Filtruj przyciski
+    document.querySelectorAll('nav button').forEach(btn => {
+      btn.style.display = btn.textContent.toLowerCase().includes(searchValue) ? 'inline-block' : 'none';
+    });
+  }
+
+  // Inicjalizacja
+  renderCats();
+  searchInput.addEventListener('input', filterCats);
+</script>
+
+</body>
+</html>
+
+
+
